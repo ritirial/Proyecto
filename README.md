@@ -79,20 +79,20 @@ Desde el directorio raíz, ejecuta:
 
 Las pruebas unitarias implementadas son:
 
-1. test_csv.py: Realiza una prueba de lectura del archivo csv y comprueba que se genera una lista no vacía. 
-2. test_currency.py: Realiza una prueba de conexión con la API de conversión de monedas, validando que se recibe un numero mayor a 0.
-3. test_item_add.py: Realiza una prueba de la función add() del repositorio.
-4. test_item_remove.py: Realiza una prueba de la función delete() del repositorio.
-5. test_get_list_route.py: Comprueba que la ruta GET '/item' utiliza el archivo template correcto.
+1. <b>test_csv.py</b>: Realiza una prueba de lectura del archivo csv y comprueba que se genera una lista no vacía. 
+2. <b>test_currency.py</b>: Realiza una prueba de conexión con la API de conversión de monedas, validando que se recibe un numero mayor a 0.
+3. <b>test_item_add.py</b>: Realiza una prueba de la función add() del repositorio.
+4. <b>test_item_remove.py</b>: Realiza una prueba de la función delete() del repositorio.
+5. <b>test_get_list_route.py</b>: Comprueba que la ruta GET '/item' utiliza el archivo template correcto.
 
 
 ## Layer Architecture
 
 La aplicación Grocery Listy Application fue desarrollada siguiendo una arquitectura por capas, la cual indica que un proyecto puede ser dividido en capas como la capa de presentación, la capa de lógica de negocios y la capa de acceso a los datos.
 
-- La capa de Presentación viene definida por el directorio template, el cual contiene los archivos html que otorgan interactividad y visualización de contenido al usuario.
+- La capa de Presentación viene definida por el directorio "template", el cual contiene los archivos html que otorgan interactividad y visualización de contenido al usuario.
 - La capa de Lógica de Negocios está compuesta por el directorio "handler", el cual contiene las rutas de la API y el manejo de los módulos externos como la API de conversión de moneda.
-- La capa de Acceso a los Datos está formada por el directorio "repository, y contiene las funciones respectivas al manejo de querys para acceder a la información, que en este proyecto se conecta a una Base de Datos Postgres en el dispositivo local."
+- La capa de Acceso a los Datos está formada por el directorio "repository", y contiene las funciones respectivas al manejo de querys para acceder a la información, que en este proyecto se conecta a una Base de Datos Postgres en el dispositivo local."
 
 
 ## SOLID
@@ -120,8 +120,16 @@ Los patrones de diseño implementados consisten en:
 
 1. ¿Cuales son el top 5 de caracteristicas de arquitectura del diseño actual de tu proyecto?.
 
-R: 
-    
-2. ¿Si la aplicacion migrara a una arquitectura de microservicios, ¿Cuales serian el top 5 de caracteristicas de arquitectura? Justifica tu respuesta.
+    - <b>Maintainability</b>: Debido a su separación de funcionalidades, es posible agregar nuevas funcionalidades sin causar cambios que puedan romper el resto de funciones del proyecto.
+    - <b>Usability</b>: Debido a la implementación de la interfaz grafica con formularios y botones, se simplifica el uso de la lógica de negocio del proyecto para los clientes finales.
+    - <b>Configurability</b>: Debido a la separación de credenciales y archivos criticos, se apoya al proceso de modificación de ajustes del proyecto si se llegara a requerir.
+    - <b>Supportability</b>: La logica de negocio implementa captura de errores durante la ejecución de las rutas con la finalidad apoyar el proceso de solución de errores.
+    - <b>Accessibility</b>: El uso de etiquetas html y attributos de apoyo en los archivos templates permite ayudar a herramientas como los lectores de pantalla para ofrecer apoyo a clientes con necesidades especiales. 
+
+2. ¿Si la aplicacion migrara a una arquitectura de microservicios, ¿Cuales serian el top 5 de caracteristicas de arquitectura?
 
 R:
+
+## Otros medios
+
+Enlace del video: <a>video</a>
