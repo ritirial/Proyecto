@@ -150,4 +150,4 @@ Los patrones de diseño implementados consisten en:
 
 ## Recursos
 
-- Enlace del video: <a href="">archivo...</a>
+- Enlace del video: <https://drive.google.com/file/d/1hFskyIkTvHH9HTdWRc1hBMaZDlQ-AQMZ/view?usp=sharing>
