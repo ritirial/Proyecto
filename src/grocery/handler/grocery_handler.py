@@ -1,10 +1,11 @@
 from flask import Blueprint, request, render_template, redirect, url_for, jsonify
-from grocery.repository.currency_client import get_currency
+from grocery.grocery_utils import currency_client
 from grocery.model.grocery_item import ItemBuilder
 from grocery.repository.grocery_repository import SqlAlchemyRepository
 
 
 groceries_blueprint = Blueprint('groceries_blueprint', __name__)
+
 
 #repository contiene todo el manejo de querys en la BD
 repository = SqlAlchemyRepository()
@@ -23,8 +24,12 @@ def root():
 #GET http://localhost:3000/reset
 @groceries_blueprint.route('/reset')
 def reset():
-    repository.reset_database()
-    return redirect(url_for('groceries_blueprint.items'))
+    try:
+        repository.reset_database()
+        return redirect(url_for('groceries_blueprint.items'))
+    except Exception as e:
+        print(f"Repository error {e}")
+        return f"Error reseting the database content"
 
 
 #Mostrar un elemento de la lista de acuerdo a su SKU, y convirtiendo el valor de Price
@@ -50,17 +55,25 @@ def items():
         exp_date = request.form.get('expdate')
         
         new_item = ItemBuilder().with_sku(sku).with_name(name).with_description(desc).with_quantity(quantity).with_price(price).with_exp_date(exp_date).build()
-        repository.add(new_item)
-        #recarga la vista llamando al metodo GET
-        return redirect(url_for('groceries_blueprint.items'))
+        try:
+            repository.add(new_item)
+            #recarga la vista llamando al metodo GET
+            return redirect(url_for('groceries_blueprint.items'))
+        except Exception as e:
+            print(f"Repository error {e}")
+            return f"Error submiting new grocery Item to database"
 
 
 #Eliminar un dato en la BD de acuerdo a su SKU
 #DELETE http://localhost:3000/item/{SKU}
 @groceries_blueprint.route('/item/<sku>', methods=['DELETE'])
 def remove_item(sku):
-    repository.delete(sku)
-    return jsonify({'message': 'Item removed successfully'}), 200
+    try:
+        repository.delete(sku)
+        return jsonify({'message': 'Item removed successfully'}), 200
+    except Exception as e:
+        print(f"Repository error {e}")
+        return f"Error removing grocery Item from Database"
 
 
 #Mostrar un elemento de la lista de acuerdo a su SKU, y convirtiendo el valor de Price
@@ -70,9 +83,9 @@ def get_converted(sku):
     try:
         currency_key = request.args.get('currency')
         item = repository.get_item(sku)
-        print(item.__dict__)
-        #
-        conversion = item.Price * get_currency(currency_key)
+        get_currency = currency_client.Facade.currency_operation(currency_key)
+        conversion = item.Price * get_currency
+
         converted = {
             'SKU': item.SKU,
             'Name': item.Name,
@@ -86,4 +99,4 @@ def get_converted(sku):
         return render_template('item.html', item=converted)
     except Exception as e:
         print(f"Repository error: {e}")
-        return f"sku={sku} not found"
+        return f"Error retrieving from database, grocery Item with SKU={sku} not found"

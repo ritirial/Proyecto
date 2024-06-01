@@ -116,11 +116,10 @@ Los principios SOLID identificados en el proyecto son:
 
 Los patrones de diseño implementados consisten en:
 
-1. Creational Builder Pattern: En el archivo grocery_item.py, se utiliza este patrón de diseño debido a la cantidad de atributos de la clase Item, por lo que se cumple el objetivo de reducir el error al generar instancias de esta clase.
-2. 
-3. 
-4. 
-5. 
+1. <b>Creational - Builder</b>: En el archivo grocery_item.py, se utiliza este patrón de diseño debido a la cantidad de atributos de la clase Item, por lo que se cumple el objetivo de reducir el error al generar instancias de esta clase.
+2. <b>Structural - Facade</b>: En el archivo currency_client.py, se utilza este patrón de diseño de tal forma que se oculten las operaciones externas a la lógica de negocios cuando se necesita obtener un cambio de moneda.
+3. <b>Structura - Adapter</b>: En el archivo grocery_repository.py, se implementó este patrón de forma que exista una clase abstracta con funciones que realizarán querys de procesamineto de datos, y una clase especializada SqlAlchemyRepository que sobreescribe dichas funciones a procedimientos relacionados con el módulo de SQLAlchemy.
+
 
 ## Preguntas
 
@@ -132,9 +131,9 @@ Los patrones de diseño implementados consisten en:
     
     - <b>Configurability</b>: Debido a la separación de credenciales y archivos criticos, se apoya al proceso de modificación de ajustes del proyecto si se llegara a requerir.
     
-    - <b>Supportability</b>: La logica de negocio implementa captura de errores durante la ejecución de las rutas con la finalidad apoyar el proceso de solución de errores.
+    - <b>Supportability</b>: La logica de negocio implementa captura de errores durante la ejecución de las rutas con la finalidad de apoyar el proceso de resolución de errores.
 
-    - <b>Accessibility</b>: El uso de etiquetas html y attributos de apoyo en los archivos templates permite ayudar a herramientas como los lectores de pantalla para ofrecer apoyo a clientes con necesidades especiales. 
+    - <b>Accessibility</b>: El uso de etiquetas y attributos HTML de apoyo en los archivos "template" permite ayudar a herramientas como los lectores de pantalla para ofrecer apoyo a clientes con discapacidades. 
 
 2. ¿Si la aplicacion migrara a una arquitectura de microservicios, ¿Cuales serian el top 5 de caracteristicas de arquitectura?
 
